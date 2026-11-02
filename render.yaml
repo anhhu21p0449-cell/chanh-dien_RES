@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: chanh-dien-live
+    runtime: node
+    plan: starter            # free sẽ "ngủ" sau 15 phút không có truy cập → mất kết nối TikTok/overlay
+    buildCommand: cd live && npm ci
+    startCommand: cd live && node server.mjs
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: CONTROL_TOKEN
+        generateValue: true  # Render tự sinh mã bí mật; xem trong Environment
